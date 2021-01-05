@@ -1,0 +1,31 @@
+---
+title: "MSDRFars"
+author: "Kate Rinard"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{MSDRFars}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+This package provides functions for understanding traffic accident patterns using data from the National Highway Safety institute.  Test data for years 2012, 2013 and 2014 is provided with this package.
+
+For example, you can summarize the data file for a year or set of years, and see accidents rolled up by month and year:
+
+```
+accident_summary <- fars_summarize_years(c("2013","2015"))
+head(accident_summary)
+```
+This package also provides functionality to allow you to plot accidents on a map, for a given state and year:
+
+```
+fars_map_state(1, "2013")
+```
+

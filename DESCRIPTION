@@ -1,0 +1,27 @@
+Package: MSDRFars
+Title: Parses National Highway Safety Institute data to summarize by month and year, and print accident locations on map
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Kate",
+           family = "Rinard",
+           role = c("aut", "cre"),
+           email = "not.gonna.tell@example.com",
+           comment = c(ORCID = "YOUR-ORCID-ID"))
+Description: This package allows user to visually plot traffic accident data for a given year on a state map, 
+    and also summarize data by month and year.  Requires all data to be in the standard format from the National 
+    Highway Safety Institute.
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+Imports:
+  dplyr,
+  graphics,
+  maps,
+  tidyr,
+  readr,
+  testthat
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
+RoxygenNote: 7.1.1
