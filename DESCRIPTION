@@ -18,9 +18,11 @@ Imports:
   graphics,
   magrittr,
   maps,
-  tidyr,
+  rlang,
   readr,
-  testthat
+  testthat,
+  tibble,
+  tidyr
 Suggests: 
     knitr,
     rmarkdown

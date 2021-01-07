@@ -10,6 +10,7 @@
 #'@return A tibble of the data in the file
 #'
 #'@importFrom readr read_csv
+#'@importFrom tibble as_tibble
 #'
 #'@examples
 #'fars_read(make_filename("2013"))
@@ -21,7 +22,7 @@ fars_read <- function(filename) {
   data <- suppressMessages({
     readr::read_csv(filename, progress = FALSE)
   })
-  dplyr::tbl_df(data)
+  tibble::as_tibble(data)
 }
 
 #'Create a string to use as a filename for bz2 compressed csv file for accident data in the Fatality Analysis Reporting System.
@@ -53,6 +54,7 @@ make_filename <- function(year) {
 #'plus attributes for the data, such as the state, county and others'
 #'
 #'@importFrom dplyr mutate select
+#'@importFram rlang .data
 #'
 #'@examples
 #'fars_read_years(c("2013","2015"))
@@ -64,7 +66,7 @@ fars_read_years <- function(years) {
     tryCatch({
       dat <- fars_read(file)
       dplyr::mutate(dat, year = year) %>%
-        dplyr::select(MONTH, year)
+        dplyr::select(.data$MONTH, .data$year)
     }, error = function(e) {
       warning("invalid year: ", year)
       return(NULL)
@@ -84,6 +86,7 @@ fars_read_years <- function(years) {
 #'@importFrom dplyr group_by summarize n
 #'@importFrom tidyr spread
 #'@importFrom magrittr "%>%"
+#'@importFrom rlang .data
 #'
 #'@examples
 #'fars_summarize_years(c("2013","2015"))
@@ -92,9 +95,9 @@ fars_read_years <- function(years) {
 fars_summarize_years <- function(years) {
   dat_list <- fars_read_years(years)
   dplyr::bind_rows(dat_list) %>%
-    dplyr::group_by(year, MONTH) %>%
+    dplyr::group_by(.data$year, .data$MONTH) %>%
     dplyr::summarize(n = dplyr::n()) %>%
-    tidyr::spread(year, n)
+    tidyr::spread(.data$year, n)
 }
 
 
@@ -123,7 +126,7 @@ fars_map_state <- function(state.num, year) {
 
   if(!(state.num %in% unique(data$STATE)))
     stop("invalid STATE number: ", state.num)
-  data.sub <- dplyr::filter(data, STATE == state.num)
+  data.sub <- dplyr::filter(data, data$STATE == state.num)
   if(nrow(data.sub) == 0L) {
     message("no accidents to plot")
     return(invisible(NULL))
@@ -131,8 +134,8 @@ fars_map_state <- function(state.num, year) {
   is.na(data.sub$LONGITUD) <- data.sub$LONGITUD > 900
   is.na(data.sub$LATITUDE) <- data.sub$LATITUDE > 90
   with(data.sub, {
-    maps::map("state", ylim = range(LATITUDE, na.rm = TRUE),
-              xlim = range(LONGITUD, na.rm = TRUE))
-    graphics::points(LONGITUD, LATITUDE, pch = 46)
+    maps::map("state", ylim = range(data.sub$LATITUDE, na.rm = TRUE),
+              xlim = range(data.sub$LONGITUD, na.rm = TRUE))
+    graphics::points(data.sub$LONGITUD, data.sub$LATITUDE, pch = 46)
   })
 }
