@@ -12,7 +12,7 @@
 #'@importFrom readr read_csv
 #'
 #'@examples
-#'fars_read('my_favorite.csv')
+#'fars_read(make_filename("2013"))
 #'
 #'@export
 fars_read <- function(filename) {
@@ -33,12 +33,12 @@ fars_read <- function(filename) {
 #'@return String in format accident_<year>/csv/bz2
 #'
 #'@examples
-#'make_file("2020")
+#'make_filename("2013")
 #'
 #'@export
 make_filename <- function(year) {
   year <- as.integer(year)
-  system.file("extdata", sprintf("accident_%d.csv.bz2", year), package="MSDR_fars", mustWork=TRUE)
+  system.file("extdata", sprintf("accident_%d.csv.bz2", year), package="MSDRFars", mustWork=TRUE)
 }
 
 #'Reads data from the bz compressed accidents files that correspond to the list of years passed as a parameter.
@@ -81,8 +81,9 @@ fars_read_years <- function(years) {
 #'
 #'@return Tibble with the summarized data by month with result for each year in its own column
 #'
-#'@importFrom dplyr group_by summarize
+#'@importFrom dplyr group_by summarize n
 #'@importFrom tidyr spread
+#'@importFrom magrittr "%>%"
 #'
 #'@examples
 #'fars_summarize_years(c("2013","2015"))
@@ -92,7 +93,7 @@ fars_summarize_years <- function(years) {
   dat_list <- fars_read_years(years)
   dplyr::bind_rows(dat_list) %>%
     dplyr::group_by(year, MONTH) %>%
-    dplyr::summarize(n = n()) %>%
+    dplyr::summarize(n = dplyr::n()) %>%
     tidyr::spread(year, n)
 }
 
