@@ -29,7 +29,7 @@ fars_read <- function(filename) {
 #'
 #'This function takes the year and returns a string in the format accident_<year>.csv.bz2
 #'
-#'@param Year to use a suffix in the filename
+#'@param year to use a suffix in the filename
 #'
 #'@return String in format accident_<year>/csv/bz2
 #'

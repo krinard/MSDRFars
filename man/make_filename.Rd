@@ -7,7 +7,7 @@
 make_filename(year)
 }
 \arguments{
-\item{Year}{to use a suffix in the filename}
+\item{year}{to use a suffix in the filename}
 }
 \value{
 String in format accident_<year>/csv/bz2
