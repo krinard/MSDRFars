@@ -55,6 +55,7 @@ make_filename <- function(year) {
 #'
 #'@importFrom dplyr mutate select
 #'@importFrom rlang .data
+#'@importFrom magrittr %>%
 #'
 #'@examples
 #'fars_read_years(c("2013","2015"))
@@ -85,7 +86,7 @@ fars_read_years <- function(years) {
 #'
 #'@importFrom dplyr group_by summarize n
 #'@importFrom tidyr spread
-#'@importFrom magrittr "%>%"
+#'@importFrom magrittr %>%
 #'@importFrom rlang .data
 #'
 #'@examples
@@ -115,6 +116,7 @@ fars_summarize_years <- function(years) {
 #'@importFrom dplyr filter
 #'@importFrom maps map
 #'@importFrom graphics points
+#'@importFrom magrittr %>%
 #'
 #'@examples
 #'fars_map_state(1, "2013")
