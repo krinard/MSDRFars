@@ -7,7 +7,9 @@
 fars_map_state(state.num, year)
 }
 \arguments{
-\item{The}{state number and year to plot data for}
+\item{state.num}{The state number to plot data for}
+
+\item{year}{The year to plot data for}
 }
 \value{
 Nothing. Outputs a plot of the locations of accidents on a state map for a given year

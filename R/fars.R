@@ -54,7 +54,7 @@ make_filename <- function(year) {
 #'plus attributes for the data, such as the state, county and others'
 #'
 #'@importFrom dplyr mutate select
-#'@importFram rlang .data
+#'@importFrom rlang .data
 #'
 #'@examples
 #'fars_read_years(c("2013","2015"))
@@ -107,7 +107,8 @@ fars_summarize_years <- function(years) {
 #'state and year
 #'
 #'
-#'@param The state number and year to plot data for
+#'@param state.num The state number to plot data for
+#'@param year The year to plot data for
 #'
 #'@return Nothing. Outputs a plot of the locations of accidents on a state map for a given year
 #'

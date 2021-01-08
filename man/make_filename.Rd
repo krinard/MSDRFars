@@ -16,6 +16,6 @@ String in format accident_<year>/csv/bz2
 This function takes the year and returns a string in the format accident_<year>.csv.bz2
 }
 \examples{
-make_file("2020")
+make_filename("2013")
 
 }

@@ -20,6 +20,6 @@ It uses reader::read_csv and any warning messages from readr::read_csv will be s
 but the function will issue an error if the file doesn't exist
 }
 \examples{
-fars_read('my_favorite.csv')
+fars_read(make_filename("2013"))
 
 }
